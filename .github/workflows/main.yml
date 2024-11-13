@@ -33,7 +33,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
         with:
@@ -58,6 +58,7 @@ jobs:
         run: yarn run build && yarn run build:css
       - name: Run tests
         run: bundle exec rspec
+        if: ${{ matrix.ruby >= '3.2' }}
       - name: Appraise Rails 6.0
         run: bundle exec appraisal rails60 rspec
         if: ${{ matrix.ruby <= '3.0' }}
@@ -67,3 +68,4 @@ jobs:
         run: bundle exec appraisal rails70 rspec
       - name: Appraisal Rails 8.0
         run: bundle exec appraisal rails80 rspec
+        if: ${{ matrix.ruby >= '3.2' }}
