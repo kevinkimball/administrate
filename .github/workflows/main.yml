@@ -65,3 +65,5 @@ jobs:
         run: bundle exec appraisal rails61 rspec
       - name: Appraisal Rails 7.0
         run: bundle exec appraisal rails70 rspec
+      - name: Appraisal Rails 8.0
+        run: bundle exec appraisal rails80 rspec
