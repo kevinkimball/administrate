@@ -11,11 +11,7 @@ class Customer < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
 
-  KINDS = {
-    "standard" => "kind:std",
-    "vip" => "kind:vip"
-  }.freeze
-  enum kind: KINDS
+  enum :kind, {"standard" => "kind:std", "vip" => "kind:vip"}
 
   def admin?
     false
