@@ -44,8 +44,16 @@ jobs:
           cache: yarn
       - name: Install Ruby dependencies
         run: bundle install
-      - name: Install Appraisal dependencies
-        run: bundle exec appraisal install
+      - name: Install Appraisal dependencies for Rails 6.0
+        run: BUNDLE_GEMFILE=gemfiles/rails60.gemfile bundle install
+        if: ${{ matrix.ruby <= '3.0' }}
+      - name: Install Appraisal dependencies for Rails 6.1
+        run: BUNDLE_GEMFILE=gemfiles/rails61.gemfile bundle install
+      - name: Install Appraisal dependencies for Rails 7.0
+        run: BUNDLE_GEMFILE=gemfiles/rails70.gemfile bundle install
+      - name: Install Appraisal dependencies for Rails 8.0
+        run: BUNDLE_GEMFILE=gemfiles/rails80.gemfile bundle install
+        if: ${{ matrix.ruby >= '3.2' }}
       - name: Install JS dependencies
         run: yarn install
       - name: Setup the environment
