@@ -11,7 +11,11 @@ class Customer < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
 
-  enum :kind, {"standard" => "kind:std", "vip" => "kind:vip"}
+  if Rails.gem_version >= Gem::Version.new("7.0")
+    enum :kind, {"standard" => "kind:std", "vip" => "kind:vip"}
+  else
+    enum kind: {"standard" => "kind:std", "vip" => "kind:vip"}
+  end
 
   def admin?
     false

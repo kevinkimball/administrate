@@ -49,5 +49,7 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing
   # actions.
-  config.action_controller.raise_on_missing_callback_actions = true
+  if Rails.gem_version >= Gem::Version.new("7.0")
+    config.action_controller.raise_on_missing_callback_actions = true
+  end
 end
